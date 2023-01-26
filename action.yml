@@ -1,0 +1,23 @@
+# action.yml
+name: 'Mina deploy'
+description: 'Deploy ruby 2.5.0 usign mina'
+inputs:
+  ssh_private_key:  # id of input
+    description: 'Private key that can access servers'
+    required: true
+    default: '---empty---'
+  command:  # id of input
+    description: 'Command to run on mina deployer'
+    required: true
+    default: 'deploy'
+  environment:  # id of input
+    description: 'Environment where command as to be runned'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.ssh_private_key }}
+    - ${{ inputs.environment }}
+    - ${{ inputs.command }}
