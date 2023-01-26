@@ -20,9 +20,27 @@ It's is based on ruby:2.5.0 docker image. If you want to run with another versio
 
 ## Example usage
 
-- name: Mina deploy
-  id: mina-deploy
-  uses: marcosanson/mina-action@v1
-  with:
-    command: 'deploy'
-    ssh_private_key: ${{ secrets.SSHPRIVATEKEY }}
+```
+  - name: Mina deploy
+    id: mina-deploy
+    uses: marcosanson/mina-action@v1
+    with:
+      command: 'deploy'
+      ssh_private_key: ${{ secrets.SSHPRIVATEKEY }}
+```
+
+## Notes
+
+### secrets.SSHPRIVATEKEY: 
+
+Create a ssh key that can access server with user you specified in mina config file. Save it to github secrets. You can use this command to generate it: ssh-keygen -t rsa -b 4096 -C
+
+### IMPORTANT:
+
+Add the following line to your mina configuration file:
+
+
+
+```
+  set :ssh_options, '-o StrictHostKeyChecking=no'
+```
